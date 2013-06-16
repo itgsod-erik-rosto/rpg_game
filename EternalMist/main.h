@@ -17,6 +17,19 @@ void declarearray()
 
 i++;
 }
+void ACTORS::collision()
+{
+     if ((getposx()+getwidth() >= crate[0].getposx()+ofX && getposx() <= crate[0].getposx()+crate[0].getwidth()+ofX)
+     && (getposy()+getheight()-crate[0].getdepth()-getdepth() >= crate[0].getposy()+ofY && getposy() <= crate[0].getposy()+crate[0].getheight()-getheight()+getdepth()+ofY))
+     {
+                              if (getposx()+getwidth() >= crate[0].getposx()+ofX && getposx()+getwidth() <= crate[0].getposx()+crate[0].getwidth()+ofX)
+     ofX+=crate[0].getposx()-getposx()+getwidth();    
+       
+       else
+      ofX-=crate[0].getposx()-getposx()+getwidth();                                                              
+     }
+}
+
 
 void declarevalues()
 {
@@ -41,7 +54,11 @@ clear_to_color(buffer, makecol(255, 255, 255));
    
    crate[0].prep();
    
+   line(buffer, testchar.getposx(), testchar.getposy()+testchar.getheight()-testchar.getdepth(), testchar.getposx()+testchar.getwidth(), testchar.getposy()+testchar.getheight()-testchar.getdepth(), makecol(255, 0, 0));
+   
+   
     testchar.draw();
+   testchar.collision();
     testchar.controls();
     
     rect(buffer, testchar.getposx(), testchar.getposy(), testchar.getposx()+testchar.getwidth(), testchar.getposy()+testchar.getheight(), makecol(0, 0, 0));

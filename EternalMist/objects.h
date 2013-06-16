@@ -12,9 +12,10 @@ void OBJECTS::prep()
 
     if (object_type=="crate_medium")
 {
-    crate[0].setwidth(88);
-    crate[0].setheight(92);
-    crate[0].setimgsource("Data/Images/Objects/crate1.bmp");
+    setwidth(88);
+    setheight(92);
+    setdepth(30);
+    setimgsource("Data/Images/Objects/crate1.bmp");
 }
 
 if (testchar.isInArea==isInArea)

@@ -6,6 +6,7 @@ class WORLD : GRAPHICS // I declare the class "WORLD" which will be used for all
     protected: 
    int width;
    int height;     
+   int depth;
    int x;
    int x2;
    int y;
@@ -24,6 +25,7 @@ class WORLD : GRAPHICS // I declare the class "WORLD" which will be used for all
         char* isInArea;
     int getwidth();
     int getheight();
+    int getdepth();
     int getpos();
     int getposx();
     int getposy();
@@ -33,6 +35,7 @@ class WORLD : GRAPHICS // I declare the class "WORLD" which will be used for all
     
     void setwidth(int w);
     void setheight(int h);
+    void setdepth(int d);
     void setimgsource(char *is);
     void setpos(int X, int Y);
     void setspeed(int spd);
@@ -69,6 +72,10 @@ void WORLD::draw()
    else
    masked_blit(bitmap, buffer, 0, 0, getposx(), getposy(), getwidth(), getheight());
    
+    if (isPlayer!=true)
+line(buffer, getposx()+ofX, getposy()+ofY+getheight()-getdepth(), getposx()+ofX+getwidth(), getposy()+ofY+getheight()-getdepth(), makecol(255, 0, 0));
+   
+   
    velocity();
 }
 char* WORLD::getimgsource()
@@ -93,6 +100,17 @@ int WORLD::getheight()
     
     return(h);
 }
+int WORLD::getdepth()
+{
+ int d = (depth);
+ 
+ return(d);   
+}
+
+void WORLD::setdepth(int d)
+{
+     depth = d;
+     }
 void WORLD::setwidth(int w)
 {
     width = w;
