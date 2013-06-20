@@ -22,7 +22,7 @@ class WORLD : GRAPHICS // I declare the class "WORLD" which will be used for all
    public:
         bool hasProperties;
         bool isPlayer;
-        char* isInArea;
+        char *isInArea;
     int getwidth();
     int getheight();
     int getdepth();
@@ -33,10 +33,11 @@ class WORLD : GRAPHICS // I declare the class "WORLD" which will be used for all
     char* getimgsource();
     bool d_once;
     
+    void setimgsource(char* is);
+    void setisinarea(char* iia);
     void setwidth(int w);
     void setheight(int h);
     void setdepth(int d);
-    void setimgsource(char *is);
     void setpos(int X, int Y);
     void setspeed(int spd);
     
@@ -78,6 +79,7 @@ line(buffer, getposx()+ofX, getposy()+ofY+getheight()-getdepth(), getposx()+ofX+
    
    velocity();
 }
+
 char* WORLD::getimgsource()
 {
  char* imgs=imgsource;
@@ -87,6 +89,10 @@ char* WORLD::getimgsource()
 void WORLD::setimgsource(char *is)
 {
  imgsource=is;
+}
+void WORLD::setisinarea(char *iia)
+{
+ isInArea=iia;
 }
 int WORLD::getwidth()
 {
