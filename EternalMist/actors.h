@@ -15,21 +15,59 @@ protected:
     int MP;
     int LVL;
     int dir;
+    int anim_timer;
+   int anim_frames_done;
     
-   
     
     public:
         string s_name;
           string testname;
+          int anim_g_timer;
           
     string getname();
     void setname(string n);
     
+    void a_draw();
+    void animations();
     void displayvalues();
     void collision();
     void loadproperties();
     
 }testnpc[2], NPC[10];
+
+
+void ACTORS::animations()
+{
+    if (dir==1)
+    c_a_pY=0;
+    if (dir==2)
+    c_a_pY=150;
+    
+    anim_g_timer++;
+    
+    if (anim_g_timer>=100)
+    {
+    
+    anim_timer++;
+    
+    if (anim_timer>=30+c_a_pX/anim_timer)
+    {
+c_a_pX+=getwidth()+1;
+anim_timer=0;
+anim_frames_done++;
+
+
+if (anim_frames_done==3)
+{
+ c_a_pX=0;   
+ anim_frames_done=0;
+anim_g_timer=0;
+}
+}
+
+}
+
+}
 
 void ACTORS::displayvalues()
 {
@@ -44,8 +82,15 @@ string ACTORS::getname()
 string n = (name);
 
 return n;   
+
 }
-                   
+        void ACTORS::a_draw()
+{
+    animations();
+    
+    draw();
+}
+           
 struct PLAYER : ACTORS // I make a struct that is only going to be used by one object because 
 { // the player is going to have a lot of attributes that nobody else is allowed to have.
     
@@ -60,11 +105,13 @@ void PLAYER::controls()
  if (key[KEY_DOWN])
  {
      y_vel=speed;   
+    dir=1;
     }   
      
      if (key[KEY_UP])
  {
      y_vel=-speed;   
+     dir=2;
     }  
     if (!key[KEY_UP] && !key[KEY_DOWN])
     y_vel=0; 

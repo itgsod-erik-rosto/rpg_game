@@ -16,6 +16,10 @@ class GAME // This is the base class for the game. All the other classes will
 
 void Loadproperties()
 {
+        
+
+    NPC[i2].isNPC=true;
+    
          ifstream NPCS("Data/NPC/NPCS.dat");
          
         
@@ -136,18 +140,18 @@ clear_to_color(buffer, makecol(255, 255, 255));
    line(buffer, testchar.getposx(), testchar.getposy()+testchar.getheight()-testchar.getdepth(), testchar.getposx()+testchar.getwidth(), testchar.getposy()+testchar.getheight()-testchar.getdepth(), makecol(255, 0, 0));
    
    
-    testchar.draw();
+    testchar.a_draw();
   
    testchar.collision();
     testchar.controls();
     
-    NPC[0].draw();
+    NPC[0].a_draw();
     NPC[0].displayvalues();
     
-    NPC[1].draw();
+    NPC[1].a_draw();
     NPC[1].displayvalues();
     
-    NPC[2].draw();
+    NPC[2].a_draw();
     NPC[2].displayvalues();
     
     rect(buffer, testchar.getposx(), testchar.getposy(), testchar.getposx()+testchar.getwidth(), testchar.getposy()+testchar.getheight(), makecol(0, 0, 0));

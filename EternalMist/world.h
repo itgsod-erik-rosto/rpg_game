@@ -32,6 +32,10 @@ class WORLD : GRAPHICS // I declare the class "WORLD" which will be used for all
     int getspeed();
     char* getimgsource();
     bool d_once;
+    bool isNPC;
+    
+    int c_a_pX;
+    int c_a_pY;
     
     void setimgsource(char* is);
     void setisinarea(char* iia);
@@ -69,14 +73,17 @@ void WORLD::draw()
  
 
    if (isPlayer!=true)
-   masked_blit(bitmap, buffer, 0, 0, getposx()+ofX, getposy()+ofY, getwidth(), getheight());
+   masked_blit(bitmap, buffer, c_a_pX, c_a_pY, getposx()+ofX, getposy()+ofY, getwidth(), getheight());
    else
-   masked_blit(bitmap, buffer, 0, 0, getposx(), getposy(), getwidth(), getheight());
+   masked_blit(bitmap, buffer, c_a_pX, c_a_pY, getposx(), getposy(), getwidth(), getheight());
    
     if (isPlayer!=true)
 line(buffer, getposx()+ofX, getposy()+ofY+getheight()-getdepth(), getposx()+ofX+getwidth(), getposy()+ofY+getheight()-getdepth(), makecol(255, 0, 0));
    
-   
+   if (isNPC==true)
+   {
+    
+    }
    velocity();
 }
 
