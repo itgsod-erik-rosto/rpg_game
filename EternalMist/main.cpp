@@ -30,17 +30,9 @@ while (!key[KEY_ESC]) // Here is the game loop.
      circlefill(buffer, mouse_x, mouse_y, 5, makecol(255, 0, 0));
     
     
-    
-
-
-    
         textprintf_ex(buffer, font, 10, 10, makecol(255, 100, 200), -1, "%s", testchar.testname.c_str() );
         
-    
-         
-       
-       
-              
+               
     blit(buffer, screen, 0, 0, 0, 0, Screen.getwidth(), Screen.getheight());
     clear_bitmap(buffer);
 }   

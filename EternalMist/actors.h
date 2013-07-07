@@ -20,6 +20,9 @@ protected:
     
     
     public:
+        char* action;
+        char* animation;
+        
         string s_name;
           string testname;
           int anim_g_timer;
@@ -28,6 +31,7 @@ protected:
     void setname(string n);
     
     void a_draw();
+    void actions();
     void animations();
     void displayvalues();
     void collision();
@@ -35,38 +39,62 @@ protected:
     
 }testnpc[2], NPC[10];
 
-
+void ACTORS::actions()
+{
+ if (action=="walk_down")
+ {
+        animation=action;
+        dir=1;
+        x_vel=0;
+        y_vel=speed;   
+    }   
+    else if (action=="walk_up")
+ {
+         animation=action;
+        dir=2;
+        x_vel=0;
+        y_vel= -speed;   
+    }   
+    else if (action=="walk_left")
+ {
+        dir=3;
+        y_vel=0;
+        x_vel=-speed;   
+    }   
+    else if (action=="walk_right")
+ {
+        dir=4;
+        y_vel=0;
+         x_vel=speed;   
+    }   
+    if (action=="idle")
+    {
+     x_vel=0;
+     y_vel=0;   
+    }
+}
 void ACTORS::animations()
 {
     if (dir==1)
-    c_a_pY=0;
+    {
+        c_a_pY=0;
+    }
     if (dir==2)
-    c_a_pY=150;
-    
-    anim_g_timer++;
-    
-    if (anim_g_timer>=100)
     {
-    
-    anim_timer++;
-    
-    if (anim_timer>=30+c_a_pX/anim_timer)
+     c_a_pY=150;   
+    }
+    if (dir==3)
     {
-c_a_pX+=getwidth()+1;
-anim_timer=0;
-anim_frames_done++;
-
-
-if (anim_frames_done==3)
-{
- c_a_pX=0;   
- anim_frames_done=0;
-anim_g_timer=0;
-}
-}
-
-}
-
+        c_a_pY=301;
+    }
+    if (dir==4)
+    {
+     c_a_pY=452;   
+    }
+    if (animation=="walk_up")
+    {
+        
+    }
 }
 
 void ACTORS::displayvalues()
@@ -86,8 +114,11 @@ return n;
 }
         void ACTORS::a_draw()
 {
+   
+    actions();
     animations();
     
+     action="idle";
     draw();
 }
            
@@ -101,32 +132,26 @@ struct PLAYER : ACTORS // I make a struct that is only going to be used by one o
 
 void PLAYER::controls()
 {
-     
+   
  if (key[KEY_DOWN])
  {
-     y_vel=speed;   
-    dir=1;
+     action="walk_down";
     }   
-     
      if (key[KEY_UP])
  {
-     y_vel=-speed;   
-     dir=2;
+    action="walk_up";
     }  
-    if (!key[KEY_UP] && !key[KEY_DOWN])
-    y_vel=0; 
     
      if (key[KEY_RIGHT])
  {
-     x_vel=speed;   
+    action="walk_right";
     }
      
      if (key[KEY_LEFT])
  {
-     x_vel=-speed;   
+     action="walk_left";
     }
-     if (!key[KEY_RIGHT] && !key[KEY_LEFT])
-    x_vel=0; 
+    
          
 }
 
@@ -140,7 +165,7 @@ void load_actors()
  testchar.setheight(150);
  testchar.setdepth(20);
  testchar.setpos(Screen.getwidth()/2, Screen.getheight()/2);
- testchar.setimgsource("Data/Images/testchar1.bmp");   
+ testchar.setimgsource("Data/Images/Characters/testchar1.bmp");   
  testchar.isInArea="testhall1";
 
 }
